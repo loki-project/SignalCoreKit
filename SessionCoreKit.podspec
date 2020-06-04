@@ -7,21 +7,21 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "SignalCoreKit"
+  s.name             = "SessionCoreKit"
   s.version          = "1.0.0"
-  s.summary          = "A Swift & Objective-C library used by other Signal libraries."
+  s.summary          = "A Swift & Objective-C library used by other Session libraries."
 
   s.description      = <<-DESC
-A Swift & Objective-C library used by other Signal libraries.
+A Swift & Objective-C library used by other Session libraries.
   DESC
 
-  s.homepage         = "https://github.com/signalapp/SignalCoreKit"
+  s.homepage         = "https://github.com/loki-project/session-ios-core-kit"
   s.license          = 'GPLv3'
-  s.author           = { "iOS Team" => "ios@signal.org" }
-  s.source           = { :git => "https://github.com/signalapp/SignalCoreKit.git", :tag => s.version.to_s }
-  s.social_media_url = 'https://twitter.com/signalapp'
+  s.author           = { "Niels Andriesse" => "niels@loki.network" }
+  s.source           = { :git => "https://github.com/loki-project/session-ios-core-kit.git", :tag => s.version.to_s }
+  s.social_media_url = 'https://getsession.org/'
 
-  s.platform     = :ios, '9.0'
+  s.platform     = :ios, '10.0'
   #s.ios.deployment_target = '9.0'
   #s.osx.deployment_target = '10.9'
   s.requires_arc = true
