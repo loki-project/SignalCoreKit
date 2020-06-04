@@ -4,7 +4,7 @@
 
 #import "Cryptography.h"
 #import "Randomness.h"
-#import <SignalCoreKit/NSData+OWS.h>
+#import <SessionCoreKit/NSData+OWS.h>
 #import <XCTest/XCTest.h>
 
 NS_ASSUME_NONNULL_BEGIN

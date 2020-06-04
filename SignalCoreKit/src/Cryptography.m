@@ -6,7 +6,7 @@
 #import "NSData+OWS.h"
 #import <CommonCrypto/CommonCryptor.h>
 #import <CommonCrypto/CommonHMAC.h>
-#import <SignalCoreKit/Randomness.h>
+#import <SessionCoreKit/Randomness.h>
 #import <openssl/evp.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -71,9 +71,9 @@ const NSUInteger kAES256_KeyByteLength = 32;
     if (!self) {
         return self;
     }
-    
+
     _keyData = data;
-    
+
     return self;
 }
 
@@ -90,7 +90,7 @@ const NSUInteger kAES256_KeyByteLength = 32;
     if (!self) {
         return self;
     }
-    
+
     NSData *keyData = [aDecoder decodeObjectOfClass:[NSData class] forKey:@"keyData"];
     if (keyData.length != kAES256_KeyByteLength) {
         OWSFailDebug(@"Invalid key length: %lu", (unsigned long)keyData.length);
@@ -98,7 +98,7 @@ const NSUInteger kAES256_KeyByteLength = 32;
     }
 
     _keyData = keyData;
-    
+
     return self;
 }
 
@@ -473,7 +473,7 @@ const NSUInteger kAES256_KeyByteLength = 32;
                                                                @"Error message when unable to receive an attachment because the sending client is too old."));
         return nil;
     }
-    
+
     return [self decryptData:dataToDecrypt
                      withKey:key
                       digest:digest

@@ -3,7 +3,7 @@
 //
 
 #import "OWSAsserts.h"
-#import <SignalCoreKit/SignalCoreKit-Swift.h>
+#import <SessionCoreKit/SessionCoreKit-Swift.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
