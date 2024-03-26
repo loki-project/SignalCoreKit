@@ -262,19 +262,19 @@ const NSUInteger kAES256_KeyByteLength = 32;
 + (nullable NSData *)computeSHA256HMAC:(NSData *)data withHMACKey:(NSData *)HMACKey
 {
     if (data.length >= SIZE_MAX) {
-        OWSFailDebug(@"data is too long.");
+        OWSLogError(@"data is too long.");
         return nil;
     }
     size_t dataLength = (size_t)data.length;
     if (HMACKey.length >= SIZE_MAX) {
-        OWSFailDebug(@"HMAC key is too long.");
+        OWSLogError(@"HMAC key is too long.");
         return nil;
     }
     size_t hmacKeyLength = (size_t)HMACKey.length;
 
     NSMutableData *_Nullable ourHmacData = [[NSMutableData alloc] initWithLength:CC_SHA256_DIGEST_LENGTH];
     if (!ourHmacData) {
-        OWSFailDebug(@"could not allocate buffer.");
+        OWSLogError(@"could not allocate buffer.");
         return nil;
     }
     CCHmac(kCCHmacAlgSHA256, [HMACKey bytes], hmacKeyLength, [data bytes], dataLength, ourHmacData.mutableBytes);
@@ -534,7 +534,7 @@ const NSUInteger kAES256_KeyByteLength = 32;
                                                         matchingHMAC:hmac
                                                               digest:digest];
     if (!paddedPlainText) {
-        OWSFailDebug(@"couldn't decrypt attachment.");
+        OWSLogError(@"couldn't decrypt attachment.");
         *error = SCKErrorWithCodeDescription(SCKErrorCode_FailedToDecryptMessage, NSLocalizedString(@"ERROR_MESSAGE_INVALID_MESSAGE", @""));
         return nil;
     } else if (unpaddedSize == 0) {
@@ -653,7 +653,7 @@ const NSUInteger kAES256_KeyByteLength = 32;
     }
 
     if (bufferData.length < bytesEncrypted) {
-        OWSFailDebug(@"bufferData has unexpected length: %lu < %lu",
+        OWSLogError(@"bufferData has unexpected length: %lu < %lu",
                     (unsigned long) bufferData.length,
                     (unsigned long) bytesEncrypted);
         return nil;
@@ -668,7 +668,7 @@ const NSUInteger kAES256_KeyByteLength = 32;
     NSData *_Nullable hmac =
         [Cryptography truncatedSHA256HMAC:encryptedPaddedData withHMACKey:hmacKey truncation:HMAC256_OUTPUT_LENGTH];
     if (!hmac) {
-        OWSFailDebug(@"could not compute SHA 256 HMAC.");
+        OWSLogError(@"could not compute SHA 256 HMAC.");
         return nil;
     }
 
@@ -677,7 +677,7 @@ const NSUInteger kAES256_KeyByteLength = 32;
     // compute digest of: iv || encrypted data || hmac
     NSData *_Nullable digest = [self computeSHA256Digest:encryptedPaddedData];
     if (!digest) {
-        OWSFailDebug(@"data is too long.");
+        OWSLogError(@"data is too long.");
         return nil;
     }
     *outDigest = digest;
